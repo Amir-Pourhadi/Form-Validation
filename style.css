@@ -1,0 +1,42 @@
+:root {
+  --valid-color: #39ff14;
+  --invalid-color: #ff5349;
+
+  --bs-form-valid-color: var(--valid-color);
+  --bs-form-valid-border-color: var(--valid-color);
+
+  --bs-form-invalid-color: var(--invalid-color);
+  --bs-form-invalid-border-color: var(--invalid-color);
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: center / cover no-repeat url('Background.jpg');
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  width: 35%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 4px white;
+  letter-spacing: 5px;
+}
+
+.valid {
+  color: var(--valid-color);
+}
+
+.invalid {
+  color: var(--invalid-color);
+}
