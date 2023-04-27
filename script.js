@@ -13,11 +13,11 @@ function validateForm(event) {
   fields.forEach((fieldEl) => fieldEl.firstElementChild.addEventListener("input", () => validateField(fieldEl)));
 
   const data = {};
-  const isEachFieldValid = [...fields].map((field) => {
+  const isEachFieldValid = [...fields].map((fieldEl) => {
     // Extract data from each field and fill data object
-    data[field.firstElementChild.id] = field.firstElementChild.value;
+    data[fieldEl.firstElementChild.id] = fieldEl.firstElementChild.value;
 
-    return validateField(field);
+    return validateField(fieldEl);
   });
 
   // Show Submitted data if all fields are valid, Otherwise do nothing
@@ -75,10 +75,15 @@ function isValidUserName(fieldEl) {
     const isValid = userNamePattern.test(userNameValue);
 
     if (isValid) showStatus({ fieldEl, isValid, message: "This UserName is Valid!" });
-    else showStatus({ fieldEl, isValid, message: "Invalid UserName! Choose another one!" });
+    else
+      showStatus({
+        fieldEl,
+        isValid,
+        message: "Invalid UserName! Choose another one! You can't use special characters!",
+      });
 
     return isValid;
-  } else showStatus({ fieldEl, isValid: false, message: "UserName is Required!" });
+  } else showStatus({ fieldEl, isValid: false, message: "User Name is Required!" });
 
   return false;
 }
@@ -88,12 +93,12 @@ function isValidEmail(fieldEl) {
   const emailValue = fieldEl.firstElementChild.value;
 
   if (emailValue && emailValue.length) {
-    const atSymbol = emailValue.indexOf("@");
-    const dotSymbol = emailValue.lastIndexOf(".");
-    const spaceSymbol = emailValue.indexOf(" ");
+    const atSymbolIndex = emailValue.indexOf("@");
+    const dotSymbolIndex = emailValue.lastIndexOf(".");
+    const spaceSymbolIndex = emailValue.indexOf(" ");
 
-    const hasValidLength = emailValue.length > dotSymbol + 1 && dotSymbol > atSymbol + 1;
-    const hasValidSymbols = atSymbol > 0 && dotSymbol > 0 && spaceSymbol === -1;
+    const hasValidLength = emailValue.length > dotSymbolIndex + 1 && dotSymbolIndex > atSymbolIndex + 1;
+    const hasValidSymbols = atSymbolIndex > 0 && dotSymbolIndex > 0 && spaceSymbolIndex === -1;
 
     const isValid = hasValidLength && hasValidSymbols;
 
